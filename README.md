@@ -1,0 +1,2 @@
+## Drag and Drop Project
+This project implements a drag and drop functionality for images on a webpage. Users can click and drag images to move them around the screen, providing an interactive experience. The functionality supports both mouse-based dragging and touch-based dragging for touch-enabled devices.

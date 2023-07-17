@@ -3,7 +3,7 @@ const dragndrop = (() => {
   let myY = "";
   let whichArt = "";
 
-  const resetZ = (e) => {
+  const resetZ = () => {
     const elements = document.querySelectorAll("img");
     for (let i = elements.length - 1; i >= 0; i--) {
       elements[i].style.zIndex = 5;
@@ -28,11 +28,32 @@ const dragndrop = (() => {
     e.preventDefault();
   };
 
+  const touchStart = (e) => {
+    e.preventDefault();
+    let whichArt = e.target;
+    let touch = e.touches[0];
+    let moveOffsetX = whichArt.offsetLeft - touch.pageX;
+    let moveOffsetY = whichArt.offsetTop - touch.pageY;
+
+    resetZ();
+    whichArt.style.zIndex = 10;
+
+    whichArt.addEventListener("touchmove", () => {
+      let positionX = touch.pageX + moveOffsetX;
+      let positionY = touch.pageY + moveOffsetY;
+      whichArt.style.left = positionX + "px";
+      whichArt.style.top = positionY + "py";
+    });
+  };
+
   document
     .querySelector("body")
     .addEventListener("dragstart", moveStart, false);
   document
     .querySelector("body")
     .addEventListener("dragover", moveDragOver, false);
+  document
+    .querySelector("body")
+    .addEventListener("touchstart", touchStart, false);
   document.querySelector("body").addEventListener("drop", moveDrop, false);
 })();
